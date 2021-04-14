@@ -6,13 +6,10 @@ import json
 
 with open('config.json','r') as c:
     params = json.load(c)['params']
-local_server = True
+
 app = Flask(__name__)
-app.secret_key = params['secret_key']
-if(local_server):
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['production_uri']
+app.secret_key = 'Your-Secret-Key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'Your Postgres Uri' #example uri'postgresql://<usernameofdb>:<passwordofdb>@localhost/<dbname>'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -44,11 +41,6 @@ def about():
     return render_template('about.html',params=params)
 
 
-
-# @app.route("/post")
-# def post():
-#     return render_template('post.html',params=params)
-
 @app.route("/post/<string:post_slug>",methods = ['GET'])
 def post_route(post_slug):
     post = Posts.query.filter_by(slug = post_slug).first()
@@ -71,15 +63,6 @@ def dashboard():
     else:
         return render_template("login.html", params=params)
 
-
-# @app.route('/dashboard')
-# def dashboard():
-#     return render_template('dashboard.html',params = params)
-# @app.route('/login',methods = ['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         pass
-#     return render_template('login.html',params = params)
 
 @app.route("/contact", methods = ['GET', 'POST'])
 def contact():
