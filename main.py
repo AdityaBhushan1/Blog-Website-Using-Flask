@@ -82,4 +82,4 @@ def contact():
         db.session.add(entry)
         db.session.commit()
     return render_template('contact.html',params=params)
-app.run(debug=True,port = 8000)
+app.run(debug=True)
