@@ -1,12 +1,8 @@
 {
     "params":
     {
-        "fb_url":"Your Facebook Url",
-        "tw_url":"Your Twitter URL",
-        "gh_url":"Your Github URL",
-        "blog_name":"Website Name",
-        "no_of_pages":5,
-        "admin_user":"User Name For Admin Login",
-        "admin_password":"Password For Admin Login"
+        "blog_name":"Tea Bot",
+        "admin_user":"admin",
+        "admin_password":"admin"
     }
 }

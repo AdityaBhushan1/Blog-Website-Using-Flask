@@ -6,10 +6,10 @@ import json
 
 with open('config.json','r') as c:
     params = json.load(c)['params']
-
+local_server = True
 app = Flask(__name__)
-app.secret_key = 'Your-Secret-Key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'Your Postgres Uri' #example uri'postgresql://<usernameofdb>:<passwordofdb>@localhost/<dbname>'
+app.secret_key = 'super-secret-key'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:Aditya@9457@localhost/testdb" 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -26,13 +26,13 @@ class Posts(db.Model):
     title = db.Column(db.String, nullable=False)
     content = db.Column(db.String, nullable=False)
     slug = db.Column(db.String, nullable=False)
-    date = db.Column(db.String(12), nullable=True)
+    date = db.Column(db.String, nullable=True)
     img_file = db.Column(db.String, nullable=True)
     tagline = db.Column(db.String, nullable=True)
 
 @app.route("/")
 def home():
-    posts = Posts.query.filter_by().all()[0:params['no_of_pages']]
+    posts = Posts.query.filter_by().all()[0:5]
     return render_template('index.html',params=params,posts=posts)
 
 
@@ -40,29 +40,35 @@ def home():
 def about():
     return render_template('about.html',params=params)
 
-
 @app.route("/post/<string:post_slug>",methods = ['GET'])
 def post_route(post_slug):
     post = Posts.query.filter_by(slug = post_slug).first()
     return render_template('post.html',params=params,post=post)
 
-@app.route("/dashboard")
+@app.route("/dashboard", methods=("GET", "POST"))
 def dashboard():
-    if "user" in session and session['user']==params['admin_user']:
-        posts = Posts.querry.all()
-        return render_template("dashboard.html", params=params, posts=posts)
+    print(request.method)
 
-    if request.method=="POST":
+    if request.method == "GET":
+        if "user" in session and session["user"] == params["admin_user"]:
+            posts = Posts.query.all()
+            return render_template("dashboard.html", params=params, posts=posts)
+
+    if request.method == "POST":
         username = request.form.get("uname")
         userpass = request.form.get("pass")
-        if username==params['admin_user'] and userpass==params['admin_password']:
+        if username == params["admin_user"] and userpass == params["admin_password"]:
             # set the session variable
-            session['user']=username
-            posts = Posts.querry.all()
+            session["user"] = username
+            posts = Posts.query.all()
             return render_template("dashboard.html", params=params, posts=posts)
-    else:
-        return render_template("login.html", params=params)
 
+    return render_template("login.html", params=params)
+
+# @app.route('/dashboard')
+# def dashboard():
+#     posts = Posts.query.all()
+#     return render_template('dashboard.html',params=params,posts=posts)
 
 @app.route("/contact", methods = ['GET', 'POST'])
 def contact():
@@ -76,4 +82,4 @@ def contact():
         db.session.add(entry)
         db.session.commit()
     return render_template('contact.html',params=params)
-app.run(debug=True)
+app.run(debug=True,port = 8000)

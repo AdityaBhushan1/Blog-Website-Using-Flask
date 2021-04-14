@@ -1,4 +1,44 @@
 {% extends "layout.html" %}
 {% block body %}
-logged in  
+
+<header class="masthead" style="background-image: url('{{url_for('static',filename='img/admin-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Admin Panel</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sno</th>
+          <th>title</th>
+          <th>Date</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+
+
+      {% for post in posts %}
+      <tbody>
+        <tr>
+          <td>{{post.sno}}</td>
+          <td>{{post.title}}</td>
+          <td>{{post.date}}</td>
+          <td>{{post.date}}</td>
+          <td>{{post.date}}</td>
+        </tr>
+      </tbody>
+
+      {% endfor %}
+    </table>
+  </div>
 {% endblock %}  
