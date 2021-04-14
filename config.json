@@ -1,0 +1,16 @@
+{
+    "params":
+    {
+        "locla_server":"True",
+        "local_uri":"postgresql://postgres:Aditya@9457@localhost/testdb",
+        "production_uri":"mysql://root:@localhost/teabot",
+        "fb_url":"https://facebook.com/teabot",
+        "tw_url":"https://twitter.com/teabot",
+        "gh_url":"https://github.com/TierGamerpy",
+        "blog_name":"Tea Bot",
+        "no_of_pages":5,
+        "admin_user":"aditya",
+        "admin_password":"test",
+        "secret_key":"super-secret-key"
+    }
+}
