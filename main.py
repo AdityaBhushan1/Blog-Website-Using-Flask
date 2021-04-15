@@ -14,7 +14,7 @@ local_server = True
 app = Flask(__name__)
 app.secret_key = 'super-secret-key'
 app.config['UPLOAD_FOLDER'] = params['upload_location']
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:Aditya@9457@localhost/testdb" 
+app.config['SQLALCHEMY_DATABASE_URI'] = "" 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
