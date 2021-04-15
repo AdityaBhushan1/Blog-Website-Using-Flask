@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+   <!-- Custom fonts for this template -->
+   <link href="{{ url_for('static',filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+ 
+   <!-- Custom styles for this template -->
+   <link href="{{ url_for('static',filename='css/clean-blog.min.css')}}" rel="stylesheet">
+  <title>Edit/Add New Post</title>
+</head>
+<body>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h1>Basic Actions</h1>
+    <a href="/dashboard"><button class="btn btn-primary">Dashboard</button></a>
+    <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+    <hr>
+    <h1>Edit Posts</h1>
+    <form name="sentMessage" id="contactForm" action="/edit/{{post.sno}}" method="post"  novalidate>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Title</label>
+            <input type="text" class="form-control" placeholder="Title" id="title" name = 'title' value="{{post.title}}" required data-validation-required-message="Please enter blog title.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Tag Line</label>
+            <input type="text" class="form-control" placeholder="Tag Line" id="tline" name = 'tline' value="{{post.tagline}}" required data-validation-required-message="Please enter your Blog Tag Line">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Slug</label>
+            <input type="text" class="form-control" placeholder="Slug" id="slug" name = 'slug' value="{{post.slug}}" required data-validation-required-message="Please enter Your Blog Slug">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Content</label>
+            <textarea rows="5" class="form-control" placeholder="Content" id="content" name = 'content' required data-validation-required-message="Please enter Content">{{post.content}}</textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Img File</label>
+              <input type="text" class="form-control" placeholder="Img File" id="img_file" name = 'img_file' value="{{post.img_file}}" required data-validation-required-message="Please enter Img File">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+        <br>
+        <div id="success"></div>
+        <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+      </form>
+  </div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{ url_for('static',filename='js/clean-blog.min.js')}}"></script>
+</body>
+  </html>
