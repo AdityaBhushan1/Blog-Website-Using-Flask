@@ -1,8 +1,10 @@
 {
     "params":
     {
-        "blog_name":"Tea Bot",
-        "admin_user":"admin",
-        "admin_password":"admin"
+        "blog_name":"",
+        "admin_user":"",
+        "admin_password":"",
+        "upload_location":"",
+        "no_of_posts_to_display_on_home_at_once":""
     }
 }
